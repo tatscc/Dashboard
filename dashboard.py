@@ -1,19 +1,3 @@
-"""
-=======================================================================
-DASHBOARD PRESCRIPTIVO — PRODUCCIÓN DE PETRÓLEO EN COLOMBIA
-Librería: Streamlit + Plotly
-=======================================================================
-Para correr localmente:
-    pip install streamlit plotly pandas numpy scikit-learn
-    streamlit run dashboard_petroleo.py
-
-Para subir a Streamlit Cloud (streamlit.io):
-    1. Sube este archivo a un repositorio de GitHub
-    2. Entra a share.streamlit.io
-    3. Conecta el repo y selecciona este archivo
-=======================================================================
-"""
-
 import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
@@ -207,11 +191,11 @@ prod_max     = df['bpd_maximo'].mean()
 brecha_media = df['brecha'].mean()
 costo_total  = df['costo_mant_cop'].sum()
 
-k1.metric('🛢 Producción Actual Prom.', f'{prod_actual:,.0f} BPD')
-k2.metric('📈 Producción Máxima Teórica', f'{prod_max:,.0f} BPD')
-k3.metric('⚠️ Brecha Promedio', f'{brecha_media:,.0f} BPD')
-k4.metric('💰 Costo Total Mantenimiento', f'${costo_total/1e9:.1f}B COP')
-k5.metric('🔍 Pozos Analizados', f'{len(df):,}')
+k1.metric(' Producción Actual Prom.', f'{prod_actual:,.0f} BPD')
+k2.metric(' Producción Máxima Teórica', f'{prod_max:,.0f} BPD')
+k3.metric(' Brecha Promedio', f'{brecha_media:,.0f} BPD')
+k4.metric(' Costo Total Mantenimiento', f'${costo_total/1e9:.1f}B COP')
+k5.metric(' Pozos Analizados', f'{len(df):,}')
 
 st.markdown('---')
 
@@ -401,8 +385,8 @@ with c4:
         textposition='outside',
         width=0.5
     ))
+    fig5.update_layout(**chart_layout(height=300))
     fig5.update_layout(
-        **chart_layout(height=300),
         yaxis_title='BPD Promedio',
         yaxis=dict(gridcolor=BORDER, color=MUTED, range=[0, prod_operativo * 1.25])
     )
@@ -441,11 +425,11 @@ costo_extra_cop = (equipos_faltan * 8_500_000 +
                    personal_falta  * 15_000_000)
 
 e1, e2, e3 = st.columns(3)
-e1.metric('📈 BPD Adicionales Proyectados', f'{prod_adicional:,.0f} BPD',
+e1.metric(' BPD Adicionales Proyectados', f'{prod_adicional:,.0f} BPD',
            f'Campo: {campo_sel} · Factor x{factor:.1f}')
-e2.metric('⚙️ Equipos Adicionales Requeridos', f'{equipos_faltan} unidades',
-           '⚠ Cuello de botella #1')
-e3.metric('💰 Costo Estimado Expansión', f'${costo_extra_cop/1e9:.2f}B COP',
+e2.metric('Equipos Adicionales Requeridos', f'{equipos_faltan} unidades',
+           ' Cuello de botella #1')
+e3.metric(' Costo Estimado Expansión', f'${costo_extra_cop/1e9:.2f}B COP',
            'Equipos + sensores + personal')
 
 categorias = ['Equipos','Sensores','Personal Técnico','Pozos en Prueba','Capacidad Transporte']
@@ -514,7 +498,7 @@ with v2:
     """, unsafe_allow_html=True)
 
 st.write('')
-st.markdown('#### 🔍 Consulta Personalizada — Predecir producción de un pozo nuevo')
+st.markdown('####  Consulta Personalizada — Predecir producción de un pozo nuevo')
 st.caption('Ingresa los datos de cualquier pozo y el modelo predice los BPD y prescribe acciones específicas')
 
 i1, i2, i3, i4, i5 = st.columns(5)
@@ -524,16 +508,16 @@ with i3: gas_in     = st.number_input('Gas (MMSCFD)', 0.1, 5.0, 3.2, step=0.1)
 with i4: agua_in    = st.number_input('Agua (BWPD)', 10, 800, 350, step=10)
 with i5: prof_in    = st.number_input('Profundidad (m)', 800, 4500, 2800, step=100)
 
-if st.button('🛢 PREDECIR Y PRESCRIBIR'):
+if st.button(' PREDECIR Y PRESCRIBIR'):
     x_new  = scaler.transform([[presion_in, temp_in, gas_in, agua_in, prof_in]])
     pred   = model.predict(x_new)[0]
     maximo = pred * 1.35
     brecha_p = maximo - pred
 
     r1, r2, r3 = st.columns(3)
-    r1.metric('🛢 Producción Estimada', f'{pred:,.0f} BPD', 'Predicción del modelo')
-    r2.metric('📈 Máximo Teórico', f'{maximo:,.0f} BPD', 'Condiciones óptimas')
-    r3.metric('⚠️ Brecha a Cerrar', f'{brecha_p:,.0f} BPD', 'Oportunidad de mejora')
+    r1.metric(' Producción Estimada', f'{pred:,.0f} BPD', 'Predicción del modelo')
+    r2.metric(' Máximo Teórico', f'{maximo:,.0f} BPD', 'Condiciones óptimas')
+    r3.metric(' Brecha a Cerrar', f'{brecha_p:,.0f} BPD', 'Oportunidad de mejora')
 
     st.write('')
     st.markdown(f"""
