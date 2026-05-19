@@ -457,45 +457,6 @@ st.markdown('---')
 st.markdown('<div class="section-bar"></div>', unsafe_allow_html=True)
 st.markdown('<div class="tag">Sección 5</div>', unsafe_allow_html=True)
 st.subheader('Interacción con el Usuario — Validación Prescriptiva')
-st.caption('Una recomendación del mes pasado vs. los resultados reales obtenidos este mes')
-
-v1, v2 = st.columns(2)
-with v1:
-    st.markdown(f"""
-    <div style="background:#10101e;border:1px solid #1e1e3a;border-left:4px solid {PURP};
-                border-radius:8px;padding:24px;">
-      <div style="font-family:monospace;font-size:9px;letter-spacing:3px;color:{PURP};margin-bottom:10px;">
-        MES ANTERIOR — RECOMENDACIÓN DEL MODELO
-      </div>
-      <div style="font-size:15px;font-weight:700;color:white;margin-bottom:12px;">
-        Activar 12 pozos con presión &gt; 2.500 PSI · Campo Rubiales
-      </div>
-      <div style="font-size:13px;color:{MUTED};line-height:1.7;">
-        El modelo prescribió activar los 12 pozos identificados con alta presión
-        y bajos días de operación. Producción esperada adicional:
-        <b style="color:{PURP}">+2.160 BPD</b>.
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with v2:
-    st.markdown(f"""
-    <div style="background:#10101e;border:1px solid #1e1e3a;border-left:4px solid {GREEN};
-                border-radius:8px;padding:24px;">
-      <div style="font-family:monospace;font-size:9px;letter-spacing:3px;color:{GREEN};margin-bottom:10px;">
-        MES ACTUAL — RESULTADO REAL OBTENIDO
-      </div>
-      <div style="font-size:15px;font-weight:700;color:white;margin-bottom:12px;">
-        Resultado tras implementar la recomendación en campo Rubiales
-      </div>
-      <div style="font-size:13px;color:{MUTED};line-height:1.7;">
-        Tras activar los 12 pozos recomendados, la producción aumentó en
-        <b style="color:{GREEN}">+1.980 BPD</b> — un <b style="color:{GREEN}">91.7%</b>
-        de lo proyectado. Esto valida que el modelo es confiable para tomar
-        decisiones operativas.
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
 
 st.write('')
 st.markdown('####  Consulta Personalizada — Predecir producción de un pozo nuevo')
